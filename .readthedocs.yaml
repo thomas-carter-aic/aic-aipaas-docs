@@ -3,21 +3,20 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.11"
+    nodejs: "20"
+    # You can also specify other tool versions:
+    # rust: "1.70"
+    # golang: "1.20"
   jobs:
     pre_build:
       # Generate the Sphinx configuration for
       # this Jupyter Book so it builds.
       - "jupyter-book config sphinx docs/"
+# Build documentation with Mkdocs
+mkdocs:
+   configuration: mkdocs.yml
 
 # Dependencies required to build your docs
 python:
    install:
-     - method: pip
-       path: .
-       extra_requirements:
-         - sphinx
-
-sphinx:
-  builder: html
-  configuration: docs/conf.py
-  fail_on_warning: true
+   - requirements: requirements.txt
